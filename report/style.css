@@ -1,0 +1,60 @@
+li>ul {
+    display: none;
+}
+
+ul {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+}
+
+li {
+    padding-left: 1.3em;
+}
+
+#root::before {
+    content: "\f00b";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-left: -1.3em;
+    width: 1.3em;
+}
+
+.issue, .folder{
+    font-family: FontAwesome;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.parent-close::before {
+    content: "\f055";
+    font-family: FontAwesome;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: -1.3em;
+    width: 1.3em;
+    cursor: pointer;
+}
+
+.parent-open::before {
+    content: "\f056";
+    font-family: FontAwesome;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: -1.3em;
+    width: 1.3em;
+    cursor: pointer;
+}
+
+#root~ul {
+    display: block;
+}
+
+.success {
+    background-color: rgba(20, 237, 5, 0.408)
+}
+
+.error {
+    background-color: rgba(237, 5, 5, 0.408)
+}

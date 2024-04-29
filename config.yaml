@@ -1,0 +1,16 @@
+settings:
+    ado_env:
+      # Azure DevOps
+      organization: organization-name
+      application_url: https://dev.azure.com/
+      username: ado-your-username
+      ado_pat: ado-personal-acces-token
+      issue_type_map: { Bug: Bug, Story: "User Story", Task: Task, Epic: Epic}
+      status_map: { "In Progress":	Active, Accepted: Resolved, Reopened: Active }
+
+    data_center_env:
+      # Data Center
+      application_url: https://www.mywebsite.com/jira/
+      username: data-center-username
+      password: data-center-password
+      # pat: data-center-personal-access-toke

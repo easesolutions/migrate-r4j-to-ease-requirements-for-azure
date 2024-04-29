@@ -1,0 +1,11 @@
+certifi==2021.10.8
+charset-normalizer==2.0.12
+idna==3.3
+issue==0.1.0
+MarkupSafe==2.1.1
+PyYAML==6.0
+requests==2.27.1
+six==1.16.0
+uplink==0.9.7
+uritemplate==4.1.1
+urllib3==1.26.9

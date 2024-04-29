@@ -1,0 +1,12 @@
+# python environment and IDE files
+venv/
+.idea/
+.vscode/
+*.code-workspace
+
+# credentials file and report directory
+report/*.html
+report/*.log
+
+# __pycache__
+**/__pycache__
