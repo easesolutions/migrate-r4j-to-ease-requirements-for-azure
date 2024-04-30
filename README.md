@@ -40,7 +40,7 @@ settings:
     username: ado-your-username
     ado_pat: ado-personal-access-token
     issue_type_map: { Story: "User Story" }
-    status_map: { "In Progress":	Active, Accepted: Resolved, Reopened: Active }
+    status_map: { "In Progress": Active, Accepted: Resolved, Reopened: Active }
 
   data_center_env:
     # Data Center
