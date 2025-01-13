@@ -2,6 +2,7 @@ from api.azure_dev_ops import ease_requirements_helper
 from api.azure_dev_ops import ado_helper
 from api.azure_dev_ops.api import ado_api
 from report.log_and_report import write_logging_server_response
+import re
 
 
 def verify_folder_work_item_type(organization, project_key):
@@ -126,9 +127,21 @@ def find_existing_work_items_on_ado(jira_issue, ado_work_items):
                     ado_work_items.remove(item)
                     return item["id"]
         else:
-            jira_description = jira_issue["issueData"]["fields"]["description"] \
-                               if jira_issue["issueData"]["fields"]["description"] else ""
-            if '\xa0' in jira_description:
+            # Check if the title matches the regex pattern [ProjectKey-Number]
+            # If yes, it was migrated from Jira like this using solidify/jira-azuredevops-migrator
+            regex_pattern = r"\[" + jira_issue["issue_key"] + "\]"
+            if re.search(regex_pattern, item["fields"]["System.Title"]):
+                ado_work_items.remove(item)
+                return item["id"]
+            
+            fields = jira_issue["issueData"].get("fields", None)
+            if fields is None:
+                fields = jira_issue.get("issueData", None)
+            if fields is None:                
+                continue
+
+            jira_description = fields.get("description", "")
+            if jira_description != None and '\xa0' in jira_description:
                 jira_description = jira_description.replace('\xa0', '&nbsp;')
             if jira_issue[title_key] == item["fields"]["System.Title"]:
                 if jira_description == ado_description:
