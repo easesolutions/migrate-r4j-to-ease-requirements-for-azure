@@ -1,5 +1,6 @@
 # python environment and IDE files
 venv/
+.venv/
 .idea/
 .vscode/
 *.code-workspace
@@ -10,3 +11,6 @@ report/*.log
 
 # __pycache__
 **/__pycache__
+
+# Prevent accidentally committing your local configuration
+config.yaml
