@@ -65,7 +65,7 @@ def get_project_by_id_or_key(project_id_or_key):
 
 
 @retry_request
-def get_all_issues_in_project_by_project_key(project_key):
+def get_all_issues_in_project_by_project_key_or_tree(project_key, project_name):
     """
     Retrieves all issues in a project from Jira based on the provided project key.
 
@@ -75,5 +75,5 @@ def get_all_issues_in_project_by_project_key(project_key):
     Returns:
         dict: The JSON response containing the list of issues in the project.
     """
-    response = jira_api.get_all_issues_in_project_by_project_key(project_key).json()
+    response = jira_api.get_all_issues_in_project_by_project_key_or_tree(project_key, project_name).json()
     return response

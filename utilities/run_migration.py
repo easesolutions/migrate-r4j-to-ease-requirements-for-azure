@@ -1,7 +1,7 @@
 """Implements the migration from an R4J project to easeRequirements for Azure DevOps"""
 from api import r4j_helper
 from api.azure_dev_ops import ado_helper, ease_requirements_helper
-from api.data_center.jira_helper import get_all_issues_in_project_by_project_key, get_project_by_name
+from api.data_center.jira_helper import get_all_issues_in_project_by_project_key_or_tree, get_project_by_name
 from config.config import ADO_ENV
 from report.log_and_report import (generate_expected_tree_html,
                                    initialize_logging, open_report_html,
@@ -42,7 +42,7 @@ def run_migration(project_name, dry_run):
     write_logging_simple_message("Download the issues from Jira DC")
     project = get_project_by_name(project_name)
     project_key = project["key"]
-    project_issues = get_all_issues_in_project_by_project_key(project_key)[
+    project_issues = get_all_issues_in_project_by_project_key_or_tree(project_key, project_name)[
         "issues"]
 
     # Download the tree from R4JDC

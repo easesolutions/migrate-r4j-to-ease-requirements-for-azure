@@ -41,8 +41,8 @@ class JiraAPI(Consumer):
     def get_project_by_id_or_key(self, project_id_or_key):
         """Get project details by project id or key"""
 
-    @get("{}{}".format(jira_endpoint, 'search?jql=project={project_key}&maxResults=1000'))
-    def get_all_issues_in_project_by_project_key(self, project_key):
+    @get("{}{}".format(jira_endpoint, 'search?jql=project={project_key} OR issue in requirementsPath("{project_name}")&maxResults=1000'))
+    def get_all_issues_in_project_by_project_key_or_tree(self, project_key, project_name):
         """Get all issues in project by project key"""
 
 
