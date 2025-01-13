@@ -73,10 +73,15 @@ def replace_tree_issues_data_with_jira_issue_data(tree_items_list, project_issue
         project_issues: (list): A list all the issues in the project, with all its information
         like summary, description, and status.
     """
-    for index, issue_data in enumerate(tree_items_list):
+    for index, issue_data in enumerate(tree_items_list):        
         if "issueData" in issue_data:
+            replaced = False
             for issue in project_issues:
                 if int(issue_data["issueData"]["issueId"]) == int(issue["id"]):
+                    replaced = True
                     issue_data["issueData"] = issue
                     tree_items_list[index] = issue_data
                     break
+            if not replaced:
+                throw_error(f"Jira Issue with id {issue_data['issueData']['issueId']} not found in the project")
+
