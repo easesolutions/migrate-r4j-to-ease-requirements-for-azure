@@ -196,7 +196,7 @@ def generate_expected_tree_html(path, issue_process_list, project_key):
 
     html = report_html + f"{SCRIPT}{STYLESHEET}{FONT_AWESOME}</body></html>"
 
-    hs = open(path, 'w')
+    hs = open(path, 'w', encoding='utf-8')
     hs.write(html)
 
 
