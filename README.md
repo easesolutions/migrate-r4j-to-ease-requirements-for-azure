@@ -41,6 +41,19 @@ settings:
     ado_pat: ado-personal-access-token
     issue_type_map: { Story: "User Story" }
     status_map: { "In Progress": Active, Accepted: Resolved, Reopened: Active }
+    link_type_map:
+      {
+        "relates to": "System.LinkTypes.Related",
+
+        "derives to": "System.LinkTypes.Dependency-Reverse",
+        "derives from": "System.LinkTypes.Dependency-Forward",
+        
+        "trace to": "System.LinkTypes.Dependency-Reverse",
+        "trace from": "System.LinkTypes.Dependency-Forward",
+
+        "is tested by": "Microsoft.VSTS.Common.TestedBy-Forward",
+        "tests": "Microsoft.VSTS.Common.TestedBy-Reverse",
+      }
 
   data_center_env:
     # Data Center
