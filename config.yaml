@@ -3,10 +3,31 @@ settings:
       # Azure DevOps
       organization: organization-name
       application_url: https://dev.azure.com/
-      username: ado-your-username
-      ado_pat: ado-personal-acces-token
-      issue_type_map: { Bug: Bug, Story: "User Story", Task: Task, Epic: Epic}
-      status_map: { "In Progress": Active, Accepted: Resolved, Reopened: Active }
+      issue_type_map: { Bug: Bug, Story: "User Story", Task: Task, Epic: Epic }
+      status_map:
+        {
+          Draft: New,
+          "In Progress": Active,
+          Reopened: Active,
+          "Customer Requirement/Draft": Draft,
+          "Functional Requirement/Draft": Draft,
+          "Test Case/New": Design,
+          "To Do": New,
+          "Done": Closed,
+        }
+      link_type_map:
+        {
+          "relates to": "System.LinkTypes.Related",
+
+          "derives to": "System.LinkTypes.Dependency-Reverse",
+          "derives from": "System.LinkTypes.Dependency-Forward",
+          
+          "trace to": "System.LinkTypes.Dependency-Reverse",
+          "trace from": "System.LinkTypes.Dependency-Forward",
+
+          "is tested by": "Microsoft.VSTS.Common.TestedBy-Forward",
+          "tests": "Microsoft.VSTS.Common.TestedBy-Reverse",
+        }
 
     data_center_env:
       # Data Center

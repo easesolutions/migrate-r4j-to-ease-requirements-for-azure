@@ -57,7 +57,9 @@ settings:
   * **username**: Azure DevOps user with WRITE rights to the project being migrated.
   * **ado_pat**: Azure DevOps Api Token to access the ADO instance. The token must have read and write rights to work items and extension data and read access to projects
   * **issue_type_map**: A map between issue type names and work item type names where the key is the Jira issue type and the value the Azure DevOps work item type
-  * **status_map**: A map between Jira status and Azure DevOps states where the key is the Jira status and the value the Azure DevOps state
+  * **status_map**: A map between Jira status and Azure DevOps states where the key is the Jira status and the value the Azure DevOps state. For specific work item status the key shall be `<issue type>/<status>`,
+  e.g.: Bug/New
+  * **link_map**: A map between Jira links and Azure DevOps links
 
 ### Jira Server/Data Center configurations
   * **application_url**: URL to the Jira Server or Data Center instance.

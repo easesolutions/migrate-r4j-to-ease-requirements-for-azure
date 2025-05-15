@@ -20,6 +20,7 @@ class AdoSettings:
         self.ado_pat = env_settings['ado_pat']
         self.issue_type_map = env_settings['issue_type_map'] if 'issue_type_map' in env_settings else {}
         self.status_map = env_settings['status_map'] if 'status_map' in env_settings else {}
+        self.link_type_map = env_settings['link_type_map'] if 'link_type_map' in env_settings else {}
 
 
 class DataCenterSettings:

@@ -27,11 +27,16 @@ def retry_request(function):
                 result = function(*args, **kwargs)
                 return result
             except requests.exceptions.RequestException as e:
-                write_logging_error(f"Error making request: {e}")
+                if e.args[0].startswith("401 Client Error"):
+                    print("401 Client Error: Unauthorized. Please check your credentials.")
+                    raise e
+                if e.args[0].startswith("404 Client Error"):
+                    raise e
+                if e.args[0].startswith("400 Bad Request"):
+                    raise e
                 if i == MAX_RETRIES - 1:
                     print("Reached max number of retries. Aborting...")
                     raise e
-                write_logging_simple_message(f"Retrying request in {2 ** i} seconds...")
                 time.sleep(2**i)
         raise TimeoutError("Max request retries reached")
 

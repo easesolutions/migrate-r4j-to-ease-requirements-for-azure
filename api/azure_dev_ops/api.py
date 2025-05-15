@@ -1,6 +1,6 @@
 """Implements the easeRequirements and Azure DevOps APIs"""
 import requests
-from uplink import Consumer, get, post, headers, json, Body, put, delete
+from uplink import Consumer, get, post, headers, json, Body, put, delete, patch
 from uplink.auth import BasicAuth
 import urllib3
 from urllib3 import exceptions
@@ -16,9 +16,9 @@ class EaseRequirementsForAzureDevopsApi(Consumer):
     """
     API_VERSION = "3.2-preview"
     url_tree_items = f"{ADO_ENV.organization}/_apis/ExtensionManagement/InstalledExtensions/easesol/" \
-                     "ease-requirements/Data/Scopes/Default/Current/Collections/TreeItems_"
+                     "requirements/Data/Scopes/Default/Current/Collections/TreeItems_"
     url_folder_work_item_type = f"{ADO_ENV.organization}/_apis/ExtensionManagement/InstalledExtensions/easesol/" \
-                                "ease-requirements/Data/Scopes/Default/Current/Collections/" \
+                                "requirements/Data/Scopes/Default/Current/Collections/" \
                                 "%24settings/Documents/Settings_"
 
     @headers({"Accept": f"application/json; api-version={API_VERSION}"})
@@ -81,6 +81,13 @@ class AzureDevOpsApi(Consumer):
     @post("{organization}/{project}/_apis/wit/workitems/${work_item_type}")
     def create_work_item(self, organization, project, work_item_type, body: Body):
         """Create new WorkItem"""
+
+    @headers({"Accept": f"application/json-patch+json; api-version={API_VERSION}"})
+    @headers({"Content-Type": "application/json-patch+json"})
+    @json
+    @patch("{organization}/{project}/_apis/wit/workitems/{work_item_id}")
+    def update_work_item(self, organization, project, work_item_id, body: Body):
+        """Update WorkItem"""
 
     @headers({"Accept": f"application/json; api-version={API_VERSION_WIQL}"})
     @headers({"Content-Type": "application/json"})

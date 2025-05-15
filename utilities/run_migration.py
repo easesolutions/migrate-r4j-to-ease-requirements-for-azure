@@ -80,8 +80,9 @@ def run_migration(project_name, dry_run):
 
         # Create all the issues as Work Items
         write_logging_simple_message("Creating issues as Work Items")
-        create_work_items_on_ado(
-            tree_items_list, jira_ado_ids, folder_type, project_name)
+        if not dry_run:
+            create_work_items_on_ado(
+                tree_items_list, jira_ado_ids, folder_type, project_name)
 
     if not dry_run:
         # Replace the Jira id with the Ado ids

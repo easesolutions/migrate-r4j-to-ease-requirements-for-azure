@@ -1,6 +1,7 @@
 """Azure DevOps helper functions"""
 from api.azure_dev_ops.api import ado_api
 from api.utilities.retry_request import retry_request
+from report.log_and_report import write_logging_error
 
 
 @retry_request
@@ -62,7 +63,33 @@ def create_work_item(organization, project, work_item_type, body):
         HTTPError: If the API response is not successful.
     """
     response = ado_api.create_work_item(organization, project, work_item_type, body)
-    return response.json() if response.ok else response.raise_for_status()
+    if response.ok:
+        return response.json()
+    write_logging_error(f"Error creating work item '{work_item_type}': {response.status_code} - {response.text}")
+    return response.raise_for_status()
+
+@retry_request
+def update_work_item(organization, project, work_item_id, body):
+    """
+    Creates a work item in Azure DevOps.
+
+    Args:
+        organization (str): The name of the Azure DevOps organization.
+        project (str): The name of the project.
+        work_item_id (str): The ID of the work item to update.
+        body (dict): The JSON body containing the details of the work item.
+
+    Returns:
+        dict: The JSON response containing the created work item.
+
+    Raises:
+        HTTPError: If the API response is not successful.
+    """
+    response = ado_api.update_work_item(organization, project, work_item_id, body)
+    if response.ok:
+        return response.json()
+    write_logging_error(f"Error updating work item '{work_item_id}': {response.status_code} - {response.text}")
+    return response.raise_for_status()
 
 
 @retry_request
